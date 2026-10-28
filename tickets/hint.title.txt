@@ -1,1 +1,1 @@
-Booking-v3 shows MM/DD/YYYY to day-first tenants — 33 unique reports from #4471
+#4471 hint — 33 reports: booking-v3 shows the wrong date format

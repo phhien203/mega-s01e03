@@ -2,6 +2,12 @@ Source ticket: #4471
 Cause: hint
 Reports: 33
 
+## Outcome — engineering update
+
+Engineering update on the course page: #4471 closed 05 October. Hint WON’T FIX: booking-v3 form retired. Closed as not planned, not completed; retirement is not a hint correction.
+
+The diagnosis and coverage below describe the original export, before that update.
+
 ## Problem
 
 The booking-v3 date field prints MM/DD/YYYY, so people follow a month-first hint while the form reads the value in the tenant's day-first order. This is a separate bug from the shared month-first parser. It affects the form channel for Alder Physio (de-DE), Copper Studio (es-ES), and Pale Harbour (pt-PT).
@@ -18,7 +24,7 @@ Keep this ticket separate from the parser ticket even when report subjects match
 
 ## Desk action while the fix is pending
 
-Use decision 0002 and the revised triage runbook now: route by supported cause, not subject. Unknown or contradictory cases stay under investigation. Reconcile new arrivals against the live queue; these counts are only the export snapshot. This issue is open, not fixed.
+Use decision 0002 and the revised triage runbook now: route by supported cause, not subject. Unknown or contradictory cases stay under investigation. Reconcile new arrivals against the live queue; these counts are only the export snapshot. This was the routing rule while fixes were pending; the engineering update above now governs closure.
 
 ## Evidence and knowledge-base page
 

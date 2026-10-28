@@ -2,7 +2,7 @@
 layout: runbook
 title: '#4471 reviewed: two date problems, not one'
 owner: phhien203 and Pi
-status: open
+status: closed
 reviewed: '2026-10-28'
 signature: 'v1.eyJzdWIiOiI0NDAzIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTMxOTU1NzUsImV4cCI6MTc5MzI4MTk3NX0.DHv45ExIpQOkgmowtQwIRGQWydw67emZR6z6bqNhsQo'
 ---
@@ -16,7 +16,19 @@ signature: 'v1.eyJzdWIiOiI0NDAzIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpY
 </script>
 
 #4471 is not one problem. Its old “known, one fix” conclusion is superseded by this review.
-Keep the parser and form-hint work separate. Neither issue is fixed by this review.
+Keep the parser and form-hint work separate. The export explains the split; the later engineering update below explains their different outcomes.
+
+## Engineering update — 05 October
+
+The course's current desk update says **#4471 closed 05 October**:
+
+- **Parser — FIXED:** `fix(dates): parse dd/mm for eu locales`. The parser ticket closes as **completed**.
+- **Hint — WON'T FIX:** booking-v3 form retired. The hint ticket closes as **not planned**, not completed.
+
+These are engineering's reported outcomes, not product fixes performed by this review.
+Retiring the form removes that path; it does not mean its hint was corrected.
+Keep the original report counts as the export's historical coverage and do not merge the two closure reasons.
+The unusual timing reports below still require verification if they recur or were not covered by engineering's tests.
 
 ## Separate tickets
 
@@ -51,13 +63,13 @@ Reports with different subjects can still be duplicates. Unknown tenants or uncl
 
 ## Next actions and verification
 
-Support desk: route new reports to the matching separate ticket, deduplicate by report ID, and preserve provenance.
-Do not wait for a product fix to stop the bad merge rule. Reconcile new arrivals against the live queue before closing anything;
-this export cannot tell us how many reports arrived after its cutoff.
+Support desk: apply the revised triage rule to new arrivals, deduplicate by report ID, and preserve provenance.
+The engineering update supplies the closure outcomes; the export alone could not justify closing either ticket.
+Check new reports against the fixed parser and retired booking-v3 path rather than reopening one undifferentiated bucket.
 
-Engineering: verify the shared-parser fix using a day-first tenant and an ambiguous date; verify the booking-v3 hint
-and parser agree for that tenant. Check day > 12 and month-first control cases too.
-Keep the unusual timing reports visible until reproductions confirm their cause.
+Engineering: verify the reported shared-parser fix using a day-first tenant and an ambiguous date.
+Check day > 12 and month-first control cases too. Confirm the retired booking-v3 form is no longer offered;
+do not describe its hint as fixed. Keep the unusual timing reports visible until reproductions confirm their cause.
 
 Support lead: review the live cause counts and weekly received-versus-merged view, rather than equating a bulk merge
 with an incident start or treating a fresh review date as proof of correctness.

@@ -1,1 +1,1 @@
-Shared parser reads day-first tenant dates as MM/DD — 379 unique reports from #4471
+#4471 parser — 379 reports: month-first parsing for day-first tenants

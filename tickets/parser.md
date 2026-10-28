@@ -2,6 +2,12 @@ Source ticket: #4471
 Cause: parser
 Reports: 379
 
+## Outcome — engineering update
+
+Engineering update on the course page: #4471 closed 05 October. Parser FIXED: fix(dates): parse dd/mm for eu locales. Closed as completed, based on that engineering report.
+
+The diagnosis and coverage below describe the original export, before that update.
+
 ## Problem
 
 The shared parser reads dates month first even when the tenant locale is day first. R-41200 (Harbour Dental, en-GB, app) reports 7 April becoming 4 July. R-41201 describes the reverse swap. This affects all channels except the booking-v3 form path classified as the separate hint bug.
@@ -18,7 +24,7 @@ Five unusual timing reports (R-41202, R-41209, R-41236, R-41344, R-41620) remain
 
 ## Desk action while the fix is pending
 
-Use decision 0002 and the revised triage runbook now: route by supported cause, not subject. Unknown or contradictory cases stay under investigation. Reconcile new arrivals against the live queue; these counts are only the export snapshot. This issue is open, not fixed.
+Use decision 0002 and the revised triage runbook now: route by supported cause, not subject. Unknown or contradictory cases stay under investigation. Reconcile new arrivals against the live queue; these counts are only the export snapshot. This was the routing rule while fixes were pending; the engineering update above now governs closure.
 
 ## Evidence and knowledge-base page
 
