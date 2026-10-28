@@ -23,4 +23,4 @@ this export cannot tell us how many reports arrived after its cutoff. Engineerin
 and parser agree for that tenant. Check day > 12 and month-first control cases too.
 Keep the unusual timing reports visible until reproductions confirm their cause. Support lead: review the live cause counts and weekly received-versus-merged view, rather than equating a bulk merge
 with an incident start or treating a fresh review date as proof of correctness.
-“Known” is a queue label, not evidence that all reports share a fix. desk ref DR-H321-02RQ Pages are written by people. Tables and charts are built from data at render time.
+“Known” is a queue label, not evidence that all reports share a fix. desk ref DR-VBK6-PQRV Pages are written by people. Tables and charts are built from data at render time.
