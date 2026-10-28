@@ -1,0 +1,66 @@
+---
+layout: runbook
+title: '#4471 reviewed: two date problems, not one'
+owner: phhien203 and Pi
+status: open
+reviewed: '2026-10-28'
+signature: 'phhien203 / Pi / S01E03 / 2026-10-28'
+---
+
+<script>
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import QueueTimeline from '#lib/kb/QueueTimeline.svelte';
+  import ReviewEvidence from '#lib/kb/ReviewEvidence.svelte';
+  import DedupeExplorer from '#lib/kb/DedupeExplorer.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+#4471 is not one problem. Its old “known, one fix” conclusion is superseded by this review.
+Keep the parser and form-hint work separate. Neither issue is fixed by this review.
+
+## Separate tickets
+
+- [Parser: month-first parsing of day-first tenant dates](https://github.com/phhien203/mega-s01e03/issues/1).
+  The shared parser treats a tenant's day-first input as month first, swapping the month and day.
+  For example, Harbour Dental's report R-41200 says 7 April became 4 July.
+- [Booking-v3: misleading MM/DD/YYYY hint](https://github.com/phhien203/mega-s01e03/issues/2).
+  Day-first tenants using booking-v3 submit month-first input because the form tells them to;
+  its tenant-aware reader then interprets it day first. This requires a hint fix, not just the shared parser fix.
+  R-41241 is an Alder Physio form report: 6 August became 8 June.
+
+Counts below come from the exported report data and the actual tenant directory, using `uniqueById`,
+`causeOf` and `groupByCause` in `src/lib/kb/causes.ts`. Do not group by the browser's locale or `intakeTag`.
+The table's “not this ticket” marker identifies the wrongly merged cause in the original desk ticket;
+it now has the separate GitHub ticket linked above.
+
+<CauseTable ticket={4471} />
+
+<QueueTimeline ticket={4471} />
+
+<ReviewEvidence />
+
+## Change the desk's rule now
+
+Use [the revised triage runbook](/kb/triage/dedupe) and
+[decision 0002](/kb/decisions/0002-dedupe-by-cause), which supersedes accepted decision 0001 without editing it.
+A matching subject is only a search clue. Check the report body, tenant locale, form version and channel.
+Merge only reports with the same supported cause; different causes stay in separate tickets even with identical subjects.
+Reports with different subjects can still be duplicates. Unknown tenants or unclear symptoms stay unmerged for investigation.
+
+<DedupeExplorer />
+
+## Next actions and verification
+
+Support desk: route new reports to the matching separate ticket, deduplicate by report ID, and preserve provenance.
+Do not wait for a product fix to stop the bad merge rule. Reconcile new arrivals against the live queue before closing anything;
+this export cannot tell us how many reports arrived after its cutoff.
+
+Engineering: verify the shared-parser fix using a day-first tenant and an ambiguous date; verify the booking-v3 hint
+and parser agree for that tenant. Check day > 12 and month-first control cases too.
+Keep the unusual timing reports visible until reproductions confirm their cause.
+
+Support lead: review the live cause counts and weekly received-versus-merged view, rather than equating a bulk merge
+with an incident start or treating a fresh review date as proof of correctness.
+“Known” is a queue label, not evidence that all reports share a fix.
+
+<RenderStamp {signature} />

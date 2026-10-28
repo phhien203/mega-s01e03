@@ -1,0 +1,29 @@
+---
+layout: runbook
+title: '0002 · Merge by supported cause, not subject'
+owner: phhien203 and Pi
+status: accepted
+reviewed: '2026-10-28'
+signature: 'phhien203 / Pi / S01E03 / 2026-10-28'
+---
+
+<script>
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+**Supersedes:** [0001 · Duplicates share a subject line](/kb/decisions/0001-dedupe-by-subject).
+That accepted decision remains unchanged as the historical record.
+
+Matching subjects merged two different date causes into #4471. The old choice saved reading time but hid a separate fix
+and kept misrouting new reports. The desk will spend more time checking evidence rather than merging on subject alone.
+
+Read the body and check the tenant's actual locale, booking form and channel. Use the supplied cause logic for this incident.
+Merge only when the evidence supports the same cause; a subject match is neither necessary nor sufficient.
+Browser locale and intake tags are hints, not the tenant configuration. Unknown tenants and contradictory symptoms need
+investigation, not an automatic merge. Deduplicate by report ID before counting.
+
+Apply this rule to incoming reports immediately using [the current triage runbook](/kb/triage/dedupe).
+Keep parser and form-hint tickets separate while fixes are pending. A shared symptom does not justify a shared fix.
+The report export is a snapshot; recheck the live queue before resolving the incident.
+
+<RenderStamp {signature} />

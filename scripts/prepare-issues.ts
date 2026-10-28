@@ -1,0 +1,21 @@
+import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+const audit = JSON.parse(readFileSync('analysis/report-audit.json', 'utf8'));
+const descriptions = {
+  parser: {
+    title: 'Shared parser reads day-first tenant dates as MM/DD — 379 unique reports from #4471',
+    text: `The shared parser reads dates month first even when the tenant locale is day first. R-41200 (Harbour Dental, en-GB, app) reports 7 April becoming 4 July. R-41201 describes the reverse swap. This affects all channels except the booking-v3 form path classified as the separate hint bug.\n\nExpected: preserve the tenant's intended calendar date. Actual: month/day are swapped. Reproduce with a day-first tenant and ambiguous DD/MM input such as 07/04; verify it stays 7 April through the generated invite. Make parsing explicit and locale-aware, and test ambiguous dates, day > 12, and month-first controls.`,
+    caution: `Five unusual timing reports (R-41202, R-41209, R-41236, R-41344, R-41620) remain included here under the supplied tenant classifier. Their one-day or timing symptoms are not proof of the month/day mechanism or a confirmed third bug. Investigate original input, parsed value, timezone and generated invite before claiming these are fixed. Do not count them a second time.`
+  },
+  hint: {
+    title: 'Booking-v3 shows MM/DD/YYYY to day-first tenants — 33 unique reports from #4471',
+    text: `The booking-v3 date field prints MM/DD/YYYY, so people follow a month-first hint while the form reads the value in the tenant's day-first order. This is a separate bug from the shared month-first parser. It affects the form channel for Alder Physio (de-DE), Copper Studio (es-ES), and Pale Harbour (pt-PT).\n\nR-41241 (Alder Physio, form) says bookings for 6 August appeared on 8 June; R-41230 (Copper Studio, form) says 6 January appeared as 1 June. Reproduce by following the MM/DD hint for 6 August (08/06) under a day-first tenant; the form reads 8 June. Expected: the displayed format, submitted value and tenant-aware reader agree. Fix the localized hint and verify the actual end-to-end form path, rather than assuming the shared parser fix covers this.`,
+    caution: `Keep this ticket separate from the parser ticket even when report subjects match. The current export's table calls this “not this ticket” because it was merged into #4471 without its own desk ticket; this GitHub issue supplies that missing track.`
+  }
+};
+mkdirSync('tickets', {recursive:true});
+for (const group of audit.groups) {
+  const desc = descriptions[group.cause as keyof typeof descriptions];
+  const body = `## Problem\n\n${desc.text}\n\n## Coverage\n\n**${group.count} unique reports** from merged support ticket **#4471**; ${group.tenants} tenants; received ${group.firstSeen} through ${group.lastSeen}.\n\nThe export contains ${audit.rawRows} rows but only ${audit.uniqueReports} unique report IDs (${audit.duplicateRows} overlapping export rows). Counts use uniqueById, then tenant locale, form version and channel via causeOf in src/lib/kb/causes.ts. Browser locale and intakeTag are not authoritative. Intake labels within this group: ${JSON.stringify(group.taggedAs)}.\n\n${desc.caution}\n\n## Desk action while the fix is pending\n\nUse decision 0002 and the revised triage runbook now: route by supported cause, not subject. Unknown or contradictory cases stay under investigation. Reconcile new arrivals against the live queue; these counts are only the export snapshot. This issue is open, not fixed.\n\n## Evidence and knowledge-base page\n\n- Source: [signed review](../blob/main/src/routes/kb/incidents/4471-review/+page.svx).\n- Rendered page: [HTML with computed tables, timeline and desk ref](../blob/main/build/kb/incidents/4471-review/index.html).\n- Reproducible count and ID audit: [report-audit.json](../blob/main/analysis/report-audit.json).\n- [Replacement merge decision](../blob/main/src/routes/kb/decisions/0002-dedupe-by-cause/+page.svx).\n\n## Covered report IDs\n\n${group.ids.join(', ')}\n`;
+  writeFileSync(`tickets/${group.cause}.md`,body.replaceAll('../blob/', 'https://github.com/phhien203/mega-s01e03/blob/'));
+  writeFileSync(`tickets/${group.cause}.title.txt`,desc.title+'\n');
+}

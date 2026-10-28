@@ -1,0 +1,43 @@
+---
+layout: runbook
+title: 'Triage: duplicate reports'
+owner: support desk
+status: accepted
+reviewed: '2026-10-28'
+signature: 'phhien203 / Pi / S01E03 / 2026-10-28'
+---
+
+<script>
+  import DedupeExplorer from '#lib/kb/DedupeExplorer.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+A busy morning brings hundreds of reports about the same thing. We keep one ticket per issue
+and merge every duplicate into it, so engineering sees one thread with a count.
+
+## The rule
+
+A report is a duplicate only when evidence supports the **same cause** as an open ticket
+([decision 0002](/kb/decisions/0002-dedupe-by-cause), superseding decision 0001):
+
+1. Read its body and look up its tenant's locale, form version and channel.
+2. Check the cause, not just the normalized subject or intake tag.
+3. Merge into the ticket for that cause; different causes stay separate even with identical subjects.
+4. Deduplicate by report ID. Preserve the body and provenance. Unknown tenants or unclear causes stay unmerged for investigation.
+
+<Callout>
+Apply this rule to new arrivals now. #4471 contains separate parser and form-hint problems:
+use the tickets in the <a href="/kb/incidents/4471-review">incident review</a>, not one “known” bucket.
+</Callout>
+
+## Try it
+
+<DedupeExplorer />
+
+## When you are unsure
+
+Do not merge an uncertain report. Ask for the original input, tenant configuration, expected and actual result,
+and any timezone evidence needed to reproduce it. Review live arrivals while the fixes are pending.
+
+<RenderStamp {signature} />
