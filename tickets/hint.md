@@ -1,3 +1,7 @@
+Source ticket: #4471
+Cause: hint
+Reports: 33
+
 ## Problem
 
 The booking-v3 date field prints MM/DD/YYYY, so people follow a month-first hint while the form reads the value in the tenant's day-first order. This is a separate bug from the shared month-first parser. It affects the form channel for Alder Physio (de-DE), Copper Studio (es-ES), and Pale Harbour (pt-PT).

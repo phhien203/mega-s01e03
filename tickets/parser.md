@@ -1,3 +1,7 @@
+Source ticket: #4471
+Cause: parser
+Reports: 379
+
 ## Problem
 
 The shared parser reads dates month first even when the tenant locale is day first. R-41200 (Harbour Dental, en-GB, app) reports 7 April becoming 4 July. R-41201 describes the reverse swap. This affects all channels except the booking-v3 form path classified as the separate hint bug.
