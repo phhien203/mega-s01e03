@@ -1,17 +1,17 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link href="../../../_app/immutable/entry/start.ChNahH-g.js" rel="modulepreload">
+<html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link href="../../../_app/immutable/entry/start.Caj7n33n.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/CaJ4yxud.js" rel="modulepreload">
-		<link href="../../../_app/immutable/chunks/dmUoDqYU.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/B0qrNNgx.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/ChlcNxDL.js" rel="modulepreload">
-		<link href="../../../_app/immutable/entry/app.CTKhJ0PV.js" rel="modulepreload">
+		<link href="../../../_app/immutable/entry/app.kP54Q970.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/XHsskuKj.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/IOyx6xss.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/C-GxOvDI.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/DYi2Z4yb.js" rel="modulepreload">
 		<link href="../../../_app/immutable/nodes/0.CoyIWbwY.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/BwHIwAD0.js" rel="modulepreload">
-		<link href="../../../_app/immutable/nodes/7.MT16ozpU.js" rel="modulepreload">
-		<link href="../../../_app/immutable/chunks/Bfb4xjp4.js" rel="modulepreload">
+		<link href="../../../_app/immutable/nodes/7.Dac2SrsL.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/A5ZLIyhk.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/dRWMRLC3.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/DLZlZ-eJ.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/CAe95NVP.js" rel="modulepreload">
@@ -25,19 +25,19 @@
 and merge every duplicate into it, so engineering sees one thread with a count.</p> <h2>The rule</h2> <p>A report is a duplicate only when evidence supports the <strong>same cause</strong> as an open ticket
 (<a href="/kb/decisions/0002-dedupe-by-cause">decision 0002</a>, superseding decision 0001):</p> <ol><li>Read its body and look up its tenant’s locale, form version and channel.</li> <li>Check the cause, not just the normalized subject or intake tag.</li> <li>Merge into the ticket for that cause; different causes stay separate even with identical subjects.</li> <li>Deduplicate by report ID. Preserve the body and provenance. Unknown tenants or unclear causes stay unmerged for investigation.</li></ol> <aside class="note svelte-17bri61"><!---->Apply this rule to new arrivals now. #4471 contains separate parser and form-hint problems:
 use the tickets in the <a href="/kb/incidents/4471-review">incident review</a>, not one “known” bucket.<!----></aside><!----> <h2>Try it</h2> <div class="try svelte-gq0h2h"><!--[--><fieldset class="svelte-gq0h2h"><legend>report A</legend> <select aria-label="tenant"><!--[--><option selected="">alder.physio</option><option>copper.studio</option><option>harbour.dental</option><option>kettle.books</option><option>lantern.row</option><option>long.table</option><option>morrow.tax</option><option>nine.lanterns</option><option>pale.harbour</option><option>ridge.clinic</option><option>stone.and.sons</option><!--]--></select> <select aria-label="channel"><!--[--><option>app</option><option>email</option><option selected="">form</option><!--]--></select> <input value="Booking on the wrong date" aria-label="subject"/> <code>hint</code></fieldset><fieldset class="svelte-gq0h2h"><legend>report B</legend> <select aria-label="tenant"><!--[--><option>alder.physio</option><option>copper.studio</option><option>harbour.dental</option><option selected="">kettle.books</option><option>lantern.row</option><option>long.table</option><option>morrow.tax</option><option>nine.lanterns</option><option>pale.harbour</option><option>ridge.clinic</option><option>stone.and.sons</option><!--]--></select> <select aria-label="channel"><!--[--><option>app</option><option>email</option><option selected="">form</option><!--]--></select> <input value="Booking on the wrong date" aria-label="subject"/> <code>parser</code></fieldset><!--]--> <p class="verdict svelte-gq0h2h">different causes — keep apart</p></div> <table><thead><tr><th>case</th><th>same subject</th><th>same cause</th></tr></thead><tbody><!--[--><tr><td>app vs email, same tenant</td><td>no</td><td class="svelte-gq0h2h dup">yes</td></tr><tr><td>same subject, same tenant, different channel</td><td>yes</td><td class="svelte-gq0h2h">no</td></tr><tr><td>same subject, same channel, different tenant</td><td>yes</td><td class="svelte-gq0h2h">no</td></tr><tr><td>different subject, same way in</td><td>no</td><td class="svelte-gq0h2h dup">yes</td></tr><tr><td>no tenant on file</td><td>yes</td><td class="svelte-gq0h2h">no</td></tr><!--]--></tbody></table><!----> <h2>When you are unsure</h2> <p>Do not merge an uncertain report. Ask for the original input, tenant configuration, expected and actual result,
-and any timezone evidence needed to reproduce it. Review live arrivals while the fixes are pending.</p> <!--[0--><p class="stamp svelte-1280m42">desk ref <b class="svelte-1280m42">DR-VBK6-PQRV</b></p><!--]--><!----><!----></main> <footer class="svelte-e2jw2j">Pages are written by people. Tables and charts are built from data at render time.</footer></div><!--]--><!----><!--]--><!--]--> <!--[-1--><!--]--><!--]-->
+and any timezone evidence needed to reproduce it. Review live arrivals while the fixes are pending.</p> <!--[0--><p class="stamp svelte-1280m42">desk ref <b class="svelte-1280m42">DR-T0MV-WWYF</b></p><!--]--><!----><!----></main> <footer class="svelte-e2jw2j">Pages are written by people. Tables and charts are built from data at render time.</footer></div><!--]--><!----><!--]--><!--]--> <!--[-1--><!--]--><!--]-->
 			
 			<script>
 				{
-					__sveltekit_1c6kg65 = {
+					__sveltekit_d1lqag = {
 						base: new URL("../../..", location).pathname.slice(0, -1)
 					};
 
 					const element = document.currentScript.parentElement;
 
 					Promise.all([
-						import("../../../_app/immutable/entry/start.ChNahH-g.js"),
-						import("../../../_app/immutable/entry/app.CTKhJ0PV.js")
+						import("../../../_app/immutable/entry/start.Caj7n33n.js"),
+						import("../../../_app/immutable/entry/app.kP54Q970.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element, {
 							node_ids: [0, 7],
